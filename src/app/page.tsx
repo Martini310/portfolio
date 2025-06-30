@@ -1,6 +1,7 @@
 "use client";
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
+import ProjectCard from "@/components/ProjectCard";
 
 const skills = [
   { name: "Python", logo: "/python-logo.svg" },
@@ -119,22 +120,8 @@ export default function Home() {
       <section className="relative z-10 max-w-5xl mx-auto px-6 py-12">
         <h2 className="text-2xl md:text-3xl font-bold mb-8 text-blue-400 tracking-widest uppercase">Projects</h2>
         <div className="grid md:grid-cols-2 gap-8">
-          {projects.map((project, idx) => (
-            <div
-              key={project.title}
-              className={`p-[2px] rounded-2xl bg-gradient-to-br ${idx % 2 === 0 ? 'from-blue-500 via-violet-500 to-purple-500' : 'from-purple-500 via-violet-500 to-blue-500'} shadow-[0_0_24px_4px_rgba(124,58,237,0.3)]`}
-            >
-              <div className="rounded-2xl bg-[#10162a]/90 h-full p-8 flex flex-col min-h-[180px]">
-                <h3 className="text-xl font-bold mb-2 text-white text-left">{project.title}</h3>
-                <p className="text-white/80 mb-6 text-left">{project.description}</p>
-                <a
-                  href={project.link}
-                  className="self-start px-6 py-2 rounded-full bg-gradient-to-r from-blue-500 to-violet-500 text-white font-semibold shadow-blue-500/40 shadow-md hover:scale-105 transition-transform focus:outline-none focus:ring-2 focus:ring-blue-400"
-                >
-                  View
-                </a>
-              </div>
-            </div>
+          {projects.map((project) => (
+            <ProjectCard key={project.title} project={project} />
           ))}
         </div>
       </section>
