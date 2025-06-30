@@ -25,6 +25,25 @@ const projects = [
   // Add more projects as needed
 ];
 
+// Sample resume timeline data
+const resumeTimeline = [
+  {
+    date: "2024 - Present",
+    title: "Junior Python Developer",
+    description: "Working at Tech Solutions, building web applications with Python and Django."
+  },
+  {
+    date: "2022 - 2024",
+    title: "WordPress Webmaster",
+    description: "Managed and developed custom WordPress sites for various clients."
+  },
+  {
+    date: "2020 - 2022",
+    title: "Computer Science Student",
+    description: "Studied at University of Technology, focused on web development and programming."
+  },
+];
+
 function SkillsCarousel() {
   // Duplicate the skills array for seamless looping
   const logos = [...skills, ...skills];
@@ -120,6 +139,33 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Resume Timeline Section */}
+      <section className="relative z-10 max-w-4xl mx-auto px-6 py-12">
+        <h2 className="text-2xl md:text-3xl font-bold mb-8 text-violet-400 tracking-widest uppercase">Resume</h2>
+        <div className="flex flex-col gap-10">
+          {resumeTimeline.map((item, idx) => (
+            <div key={idx} className="flex items-start gap-6">
+              {/* Date */}
+              <div className="w-32 flex-shrink-0 flex items-center justify-end pr-2">
+                <div className="text-sm text-blue-400 font-semibold text-right">{item.date}</div>
+              </div>
+              {/* Timeline */}
+              <div className="flex flex-col items-center">
+                <div className={`w-4 h-4 rounded-full ${idx === 0 ? 'bg-violet-500' : 'bg-blue-500'} border-4 border-[#10162a] shadow-lg`}></div>
+                {idx < resumeTimeline.length - 1 && (
+                  <div className="w-1 bg-gradient-to-b from-violet-500 to-blue-500 flex-1 my-1" style={{ minHeight: '48px' }}></div>
+                )}
+              </div>
+              {/* Content */}
+              <div className="flex-1 bg-[#10162a]/80 rounded-xl p-6 shadow-md">
+                <div className="text-lg font-bold mb-2">{item.title}</div>
+                <div className="text-white/80">{item.description}</div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
       {/* Contact Section */}
       <section id="contact" className="max-w-3xl mx-auto px-6 py-12">
         <h2 className="text-2xl md:text-3xl font-bold mb-6 text-violet">Contact</h2>
@@ -127,6 +173,10 @@ export default function Home() {
           <p className="text-white/80 mb-4">Contact form coming soon!</p>
         </div>
       </section>
+
+      <footer className="w-full text-center text-white/50 py-8 text-sm z-20 relative">
+        Made with ❤️ by Martin Brzeziński
+      </footer>
     </div>
   );
 }
