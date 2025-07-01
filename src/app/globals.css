@@ -95,3 +95,7 @@ body {
 .resume-card:hover::before {
   opacity: 1;
 }
+
+.inline-block svg{
+  display: inline-block;
+}
