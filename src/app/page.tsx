@@ -2,6 +2,7 @@
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import ProjectCard from "@/components/ProjectCard";
+import ResumeCard from "@/components/ResumeCard";
 
 const skills = [
   { name: "Python", logo: "/python-logo.svg" },
@@ -53,6 +54,7 @@ const resumeTimeline = [
     date: "2024 - Present",
     company: "Ecom Solutions",
     title: "Webmaster",
+    competences: ["WordPress", "WooCommerce", "Performance Optimization", "Teamwork"],
     description: `Management and development of several WordPress-based eCommerce platforms,
                   encompassing both daily administration and the implementation of new features
                   tailored to business needs. Responsible for performance optimization, error
@@ -64,6 +66,7 @@ const resumeTimeline = [
     date: "2022 - present",
     company: "Freelance",
     title: "Python Developer",
+    competences: ["Python", "Django", "REST APIs", "Self-management"],
     description: `Thanks to efficient work organization, I have been able to develop as a Python
                   Developer. I built an application using Tkinter to monitor and control loaned
                   records, replacing paper registers. I then extended it with Django to unify various
@@ -78,6 +81,7 @@ const resumeTimeline = [
     date: "2020 - 2024",
     company: "Department of Communication",
     title: "'Pojazd' and 'Kierowca' systems coordinator for CEPiK",
+    competences: ["Client Service", "Problem Solving", "Reporting", "Administration"],
     description: `I began my career as a civil servant in the Department of Communication, where I
                   was responsible for day-to-day client service in vehicle registration. Due to my
                   strong dedication, I was quickly promoted to Deputy Branch Manager, handling
@@ -89,6 +93,7 @@ const resumeTimeline = [
     date: "2005 - 2019",
     company: "Polish National Team",
     title: "Canoe Athlete",
+    competences: ["Discipline", "Teamwork", "Stress Resistance", "Goal Orientation"],
     description: `During almost 15 years of professional sports career as a canoeist, I won many
                   trophies and medals of the Polish, European and World Championships. In addition
                   to awards, I gained a lot of invaluable knowledge during this time. Sport has shaped
@@ -184,51 +189,10 @@ export default function Home() {
       {/* Resume Timeline Section */}
       <section className="relative z-10 max-w-5xl mx-auto px-6 py-12">
         <h2 className="text-2xl md:text-3xl font-bold mb-8 text-violet-400 tracking-widest uppercase">Resume</h2>
-        <div className="flex flex-col gap-10">
-          {resumeTimeline.map((item, idx) => {
-            const [expanded, setExpanded] = useState(false);
-            const words = item.description.split(/\s+/);
-            const isLong = words.length > 50;
-            const shortDesc = isLong ? words.slice(0, 50).join(" ") + "..." : item.description;
-            return (
-              <div
-                key={idx}
-                className="flex items-start rounded-xl gap-6 group transition-transform duration-200 hover:scale-[1.025] hover:shadow-xl hover:border-violet-500/40 border border-transparent"
-              >
-                {/* Date */}
-                <div className="w-32 flex-shrink-0 flex items-center justify-end pr-2">
-                  <div className="text-sm text-blue-400 font-semibold text-right">{item.date}</div>
-                </div>
-                {/* Timeline */}
-                <div className="flex flex-col items-center">
-                  <div className={`w-4 h-4 rounded-full ${idx === 0 ? 'bg-violet-500' : 'bg-blue-500'} border-4 border-[#10162a] shadow-lg`}></div>
-                  {idx < resumeTimeline.length - 2 && (
-                    <div className="w-1 bg-gradient-to-b from-violet-500 to-blue-500 flex-1 my-1" style={{ minHeight: '48px' }}></div>
-                  )}
-                </div>
-                {/* Content */}
-                <div className="flex-1 bg-[#10162a]/80 rounded-xl p-6 shadow-md transition-all duration-200 group-hover:shadow-violet-500/30 group-hover:border-violet-500/40 border border-transparent">
-                  <div className="text-lg font-bold mb-1">{item.title}</div>
-                  <div className="text-blue-400 font-semibold mb-2">{item.company}</div>
-                  <div
-                    className={`text-white/80 overflow-hidden transition-all duration-800 ease-in-out ${expanded ? 'max-h-96 opacity-100' : 'max-h-20 opacity-80'}`}
-                    style={{ position: 'relative' }}
-                  >
-                    <span>{expanded || !isLong ? item.description : shortDesc}</span>
-                    {isLong && (
-                      <button
-                        className="ml-2 text-violet-400 underline cursor-pointer text-sm font-semibold hover:text-violet-300 transition-colors absolute bottom-0 right-0 bg-[#10162a]/80 px-1"
-                        style={{ zIndex: 2 }}
-                        onClick={() => setExpanded((v) => !v)}
-                      >
-                        {expanded ? "Less" : "More"}
-                      </button>
-                    )}
-                  </div>
-                </div>
-              </div>
-            );
-          })}
+        <div className="flex flex-col gap-12">
+          {resumeTimeline.map((item, idx) => (
+            <ResumeCard key={idx} item={item} idx={idx} isLast={idx >= resumeTimeline.length - 2} />
+          ))}
         </div>
       </section>
 
