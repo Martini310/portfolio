@@ -62,3 +62,7 @@ body {
 .project-card:hover::before {
   opacity: 1;
 }
+
+.group:hover .animate-carousel {
+  animation-play-state: paused !important;
+}

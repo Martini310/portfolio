@@ -51,6 +51,7 @@ const projects = [
 const resumeTimeline = [
   {
     date: "2024 - Present",
+    company: "Ecom Solutions",
     title: "Webmaster",
     description: `Management and development of several WordPress-based eCommerce platforms,
                   encompassing both daily administration and the implementation of new features
@@ -61,6 +62,7 @@ const resumeTimeline = [
   },
   {
     date: "2022 - present",
+    company: "Freelance",
     title: "Python Developer",
     description: `Thanks to efficient work organization, I have been able to develop as a Python
                   Developer. I built an application using Tkinter to monitor and control loaned
@@ -74,6 +76,7 @@ const resumeTimeline = [
   },
   {
     date: "2020 - 2024",
+    company: "Department of Communication",
     title: "'Pojazd' and 'Kierowca' systems coordinator for CEPiK",
     description: `I began my career as a civil servant in the Department of Communication, where I
                   was responsible for day-to-day client service in vehicle registration. Due to my
@@ -84,6 +87,7 @@ const resumeTimeline = [
   },
   {
     date: "2005 - 2019",
+    company: "Polish National Team",
     title: "Canoe Athlete",
     description: `During almost 15 years of professional sports career as a canoeist, I won many
                   trophies and medals of the Polish, European and World Championships. In addition
@@ -101,22 +105,22 @@ function SkillsCarousel() {
   const logos = [...skills, ...skills];
 
   return (
-    <div className="w-full overflow-hidden py-4">
+    <div className="w-full overflow-hidden py-4 group">
       <div
-        className="flex gap-8 animate-carousel"
+        className="flex gap-8 animate-carousel group-hover:[animation-play-state:paused]"
         style={{ width: `${logos.length * 120}px` }}
       >
         {logos.map((skill, i) => (
           <div
             key={i}
-            className="flex flex-col items-center bg-gradient-to-br from-gradient-start via-gradient-mid to-gradient-end rounded-xl p-4 shadow-lg min-w-[90px]"
+            className="group/logo flex flex-col items-center bg-gradient-to-br from-gradient-start via-gradient-mid to-gradient-end rounded-xl p-4 shadow-lg min-w-[90px]"
           >
             <Image
               src={skill.logo}
               alt={skill.name}
               width={40}
               height={40}
-              className="mb-2"
+              className="mb-2 transition-transform duration-300 group-hover/logo:scale-110 group-hover/logo:rotate-6"
             />
             {/* <span className="text-sm text-white font-semibold">{skill.name}</span> */}
           </div>
@@ -178,29 +182,53 @@ export default function Home() {
       </section>
 
       {/* Resume Timeline Section */}
-      <section className="relative z-10 max-w-4xl mx-auto px-6 py-12">
+      <section className="relative z-10 max-w-5xl mx-auto px-6 py-12">
         <h2 className="text-2xl md:text-3xl font-bold mb-8 text-violet-400 tracking-widest uppercase">Resume</h2>
         <div className="flex flex-col gap-10">
-          {resumeTimeline.map((item, idx) => (
-            <div key={idx} className="flex items-start gap-6">
-              {/* Date */}
-              <div className="w-32 flex-shrink-0 flex items-center justify-end pr-2">
-                <div className="text-sm text-blue-400 font-semibold text-right">{item.date}</div>
+          {resumeTimeline.map((item, idx) => {
+            const [expanded, setExpanded] = useState(false);
+            const words = item.description.split(/\s+/);
+            const isLong = words.length > 50;
+            const shortDesc = isLong ? words.slice(0, 50).join(" ") + "..." : item.description;
+            return (
+              <div
+                key={idx}
+                className="flex items-start rounded-xl gap-6 group transition-transform duration-200 hover:scale-[1.025] hover:shadow-xl hover:border-violet-500/40 border border-transparent"
+              >
+                {/* Date */}
+                <div className="w-32 flex-shrink-0 flex items-center justify-end pr-2">
+                  <div className="text-sm text-blue-400 font-semibold text-right">{item.date}</div>
+                </div>
+                {/* Timeline */}
+                <div className="flex flex-col items-center">
+                  <div className={`w-4 h-4 rounded-full ${idx === 0 ? 'bg-violet-500' : 'bg-blue-500'} border-4 border-[#10162a] shadow-lg`}></div>
+                  {idx < resumeTimeline.length - 2 && (
+                    <div className="w-1 bg-gradient-to-b from-violet-500 to-blue-500 flex-1 my-1" style={{ minHeight: '48px' }}></div>
+                  )}
+                </div>
+                {/* Content */}
+                <div className="flex-1 bg-[#10162a]/80 rounded-xl p-6 shadow-md transition-all duration-200 group-hover:shadow-violet-500/30 group-hover:border-violet-500/40 border border-transparent">
+                  <div className="text-lg font-bold mb-1">{item.title}</div>
+                  <div className="text-blue-400 font-semibold mb-2">{item.company}</div>
+                  <div
+                    className={`text-white/80 overflow-hidden transition-all duration-800 ease-in-out ${expanded ? 'max-h-96 opacity-100' : 'max-h-20 opacity-80'}`}
+                    style={{ position: 'relative' }}
+                  >
+                    <span>{expanded || !isLong ? item.description : shortDesc}</span>
+                    {isLong && (
+                      <button
+                        className="ml-2 text-violet-400 underline cursor-pointer text-sm font-semibold hover:text-violet-300 transition-colors absolute bottom-0 right-0 bg-[#10162a]/80 px-1"
+                        style={{ zIndex: 2 }}
+                        onClick={() => setExpanded((v) => !v)}
+                      >
+                        {expanded ? "Less" : "More"}
+                      </button>
+                    )}
+                  </div>
+                </div>
               </div>
-              {/* Timeline */}
-              <div className="flex flex-col items-center">
-                <div className={`w-4 h-4 rounded-full ${idx === 0 ? 'bg-violet-500' : 'bg-blue-500'} border-4 border-[#10162a] shadow-lg`}></div>
-                {idx < resumeTimeline.length - 2 && (
-                  <div className="w-1 bg-gradient-to-b from-violet-500 to-blue-500 flex-1 my-1" style={{ minHeight: '48px' }}></div>
-                )}
-              </div>
-              {/* Content */}
-              <div className="flex-1 bg-[#10162a]/80 rounded-xl p-6 shadow-md">
-                <div className="text-lg font-bold mb-2">{item.title}</div>
-                <div className="text-white/80">{item.description}</div>
-              </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </section>
 
