@@ -26,11 +26,23 @@ const projects = [
     title: "Portfolio Website",
     description: "A personal portfolio website to showcase my work and skills.",
     link: "/projects/portfolio",
+    tech: [
+      { name: "Next.js", logo: "/nextjs-logo.svg" },
+      { name: "React", logo: "/react-logo.svg" },
+      { name: "Tailwind CSS", logo: "/css-logo.svg" },
+      { name: "Docker", logo: "/docker-logo.svg" },
+    ],
   },
   {
     title: "Task Manager Application",
     description: "A web application to manage tasks and projects.",
     link: "/projects/task-manager",
+    tech: [
+      { name: "Python", logo: "/python-logo.svg" },
+      { name: "Django", logo: "/django-logo.svg" },
+      { name: "DRF", logo: "/drf-logo.svg" },
+      { name: "Postman", logo: "/postman-logo.svg" },
+    ],
   },
   // Add more projects as needed
 ];

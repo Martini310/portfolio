@@ -6,6 +6,10 @@ type Project = {
   title: string;
   description: string;
   link: string;
+  tech?: {
+    name: string;
+    logo: string;
+  }[];
 };
 
 type ProjectCardProps = {
@@ -43,12 +47,28 @@ export default function ProjectCard({ project }: ProjectCardProps) {
     >
       <h3 className="text-xl font-bold mb-2 text-white text-left">{project.title}</h3>
       <p className="text-white/80 mb-6 text-left">{project.description}</p>
-      <a
-        href={project.link}
-        className="self-start px-6 py-2 rounded-full bg-gradient-to-r from-blue-500 to-violet-500 text-white font-semibold shadow-blue-500/40 shadow-md hover:scale-105 transition-transform focus:outline-none focus:ring-2 focus:ring-blue-400 z-10"
-      >
-        View
-      </a>
+      <div className="flex items-center justify-between mt-auto gap-4">
+        <a
+          href={project.link}
+          className="self-start px-6 py-2 rounded-full bg-gradient-to-r from-blue-500 to-violet-500 text-white font-semibold shadow-blue-500/40 shadow-md hover:scale-105 transition-transform focus:outline-none focus:ring-2 focus:ring-blue-400 z-10"
+        >
+          View
+        </a>
+        <div className="flex gap-3 ml-auto">
+          {project.tech?.map((tech, i) => (
+            <div key={tech.name} className="group relative flex flex-col items-center">
+              <img
+                src={tech.logo}
+                alt={tech.name}
+                className="w-8 h-8 grayscale group-hover:grayscale-0 group-hover:scale-110 transition-all duration-200"
+              />
+              <span className="absolute left-1/2 -translate-x-1/2 top-10 opacity-0 group-hover:opacity-100 bg-[#222] text-xs text-white px-2 py-1 rounded shadow-lg transition-all duration-200 pointer-events-none whitespace-nowrap z-20">
+                {tech.name}
+              </span>
+            </div>
+          ))}
+        </div>
+      </div>
     </div>
   );
 } 
