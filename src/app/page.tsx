@@ -199,9 +199,39 @@ export default function Home() {
       {/* Contact Section */}
       <section id="contact" className="max-w-3xl mx-auto px-6 py-12">
         <h2 className="text-2xl md:text-3xl font-bold mb-6 text-violet">Contact</h2>
-        <div className="bg-gradient-to-br from-deep-blue via-gradient-mid to-gradient-end rounded-xl p-8 shadow-lg">
-          <p className="text-white/80 mb-4">Contact form coming soon!</p>
-        </div>
+        <form
+          action="https://formspree.io/f/xgvydjyj"
+          method="POST"
+          className="bg-gradient-to-br from-deep-blue via-gradient-mid to-gradient-end rounded-xl p-8 shadow-lg flex flex-col gap-6"
+        >
+          <input
+            type="text"
+            name="name"
+            placeholder="Your Name"
+            required
+            className="px-4 py-3 rounded-lg bg-[#10162a]/80 text-white placeholder-white/60 border border-violet-700 focus:outline-none focus:ring-2 focus:ring-violet-400 transition"
+          />
+          <input
+            type="email"
+            name="email"
+            placeholder="Your Email"
+            required
+            className="px-4 py-3 rounded-lg bg-[#10162a]/80 text-white placeholder-white/60 border border-violet-700 focus:outline-none focus:ring-2 focus:ring-violet-400 transition"
+          />
+          <textarea
+            name="message"
+            placeholder="Your Message"
+            required
+            rows={5}
+            className="px-4 py-3 rounded-lg bg-[#10162a]/80 text-white placeholder-white/60 border border-violet-700 focus:outline-none focus:ring-2 focus:ring-violet-400 transition"
+          />
+          <button
+            type="submit"
+            className="mt-2 px-8 py-3 rounded-full bg-gradient-to-r from-blue-500 to-violet-500 text-white font-semibold shadow-lg hover:scale-105 transition-transform"
+          >
+            Send Message
+          </button>
+        </form>
       </section>
 
       <footer className="w-full text-center text-white/50 py-8 text-sm z-20 relative">
