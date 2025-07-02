@@ -106,6 +106,23 @@ const resumeTimeline = [
   },
 ];
 
+const TAGLINE = "Turning ideas into beautiful, functional web experiences.";
+
+function useTypingEffect(text: string, speed = 40) {
+  const [displayed, setDisplayed] = useState("");
+  useEffect(() => {
+    setDisplayed("");
+    let i = 0;
+    const interval = setInterval(() => {
+      setDisplayed((prev) => prev + text[i]);
+      i++;
+      if (i >= text.length) clearInterval(interval);
+    }, speed);
+    return () => clearInterval(interval);
+  }, [text, speed]);
+  return displayed;
+}
+
 function SkillsCarousel() {
   // Duplicate the skills array for seamless looping
   const logos = [...skills, ...skills];
@@ -147,9 +164,11 @@ export default function Home() {
         initial={{ opacity: 0, y: 40 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, ease: "easeOut" }}
-        className="flex flex-col md:flex-row items-center justify-between gap-10 px-6 py-20 max-w-5xl mx-auto"
+        className="relative flex flex-col md:flex-row items-center justify-between gap-10 px-6 py-20 max-w-5xl mx-auto"
       >
-        <div className="flex-1 flex flex-col gap-6">
+        {/* Blurred orb background */}
+        <div className="absolute -top-24 -left-32 w-[400px] h-[400px] bg-gradient-to-br from-blue-500 via-violet-500 to-purple-500 rounded-full blur-3xl opacity-30 z-0 pointer-events-none" />
+        <div className="flex-1 flex flex-col gap-6 z-10">
           <motion.h1
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
@@ -158,6 +177,16 @@ export default function Home() {
           >
             Hello, I'm <span className="bg-gradient-to-r from-blue-400 via-violet-500 to-purple-500 bg-clip-text text-transparent">Martin Brzeziński</span>
           </motion.h1>
+          {/* Tagline with typing effect */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.3, duration: 0.7, ease: "easeOut" }}
+            className="text-violet-200 text-lg md:text-xl font-mono min-h-[2.5rem]"
+            aria-label="Tagline"
+          >
+            {useTypingEffect(TAGLINE, 30)}<span className="animate-pulse">|</span>
+          </motion.div>
           <motion.p
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
@@ -166,21 +195,32 @@ export default function Home() {
           >
             I'm a Junior Python Developer & WordPress Webmaster specializing in building modern web applications and dynamic websites.
           </motion.p>
-          <motion.a
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.6, duration: 0.7, ease: "easeOut" }}
-            href="#contact"
-            className="inline-block mt-4 px-6 py-3 rounded-full bg-gradient-to-r from-violet to-purple text-white font-semibold shadow-lg hover:scale-105 transition-transform"
-          >
-            Get In Touch
-          </motion.a>
+          <div className="flex gap-4 mt-2">
+            <motion.a
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.6, duration: 0.7, ease: "easeOut" }}
+              href="#contact"
+              className="inline-block px-6 py-3 rounded-full bg-gradient-to-r from-violet to-purple text-white font-semibold shadow-lg hover:scale-105 transition-transform"
+            >
+              Get In Touch
+            </motion.a>
+            <motion.a
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.7, duration: 0.7, ease: "easeOut" }}
+              href="/cv.pdf" download
+              className="inline-block px-6 py-3 rounded-full bg-gradient-to-r from-blue-500 to-violet-500 text-white font-semibold shadow-lg hover:scale-105 transition-transform border border-blue-400/30"
+            >
+              Download CV
+            </motion.a>
+          </div>
         </div>
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.8, duration: 0.7, ease: "easeOut" }}
-          className="flex-1 flex justify-center"
+          className="flex-1 flex justify-center z-10"
         >
           <div className="rounded-full bg-gradient-to-br from-violet to-purple p-1 shadow-2xl">
             <Image
