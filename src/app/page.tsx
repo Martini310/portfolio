@@ -149,7 +149,15 @@ function SkillsCarousel() {
   const logos = [...skills, ...skills];
 
   return (
-    <div className="w-full overflow-hidden py-4 group">
+    <div
+      className="w-full overflow-hidden py-4 group"
+      style={{
+        WebkitMaskImage:
+          "linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%)",
+        maskImage:
+          "linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%)",
+      }}
+    >
       <div
         className="flex gap-8 animate-carousel group-hover:[animation-play-state:paused]"
         style={{ width: `${logos.length * 120}px` }}
@@ -157,16 +165,22 @@ function SkillsCarousel() {
         {logos.map((skill, i) => (
           <div
             key={i}
-            className="group/logo flex flex-col items-center bg-gradient-to-br from-gradient-start via-gradient-mid to-gradient-end rounded-xl p-4 shadow-lg min-w-[90px]"
+            className="group/logo flex flex-col items-center min-w-[160px]"
           >
-            <Image
-              src={skill.logo}
-              alt={skill.name}
-              width={40}
-              height={40}
-              className="mb-2 transition-transform duration-300 group-hover/logo:scale-110 group-hover/logo:rotate-6"
-            />
-            {/* <span className="text-sm text-white font-semibold">{skill.name}</span> */}
+            <div
+              className="transition-transform duration-300 rounded-2xl bg-[#181f3a]/80 border border-violet-500/30 group-hover/logo:border-violet-400 group-hover/logo:shadow-[0_0_12px_2px_rgba(139,92,246,0.4)] w-32 h-32 flex flex-col items-center justify-center scale-100 group-hover/logo:scale-105"
+            >
+              <Image
+                src={skill.logo}
+                alt={skill.name}
+                width={56}
+                height={56}
+                className="transition-transform duration-300 group-hover/logo:scale-110 group-hover/logo:rotate-3 mb-2"
+              />
+              <span className="text-sm text-white font-semibold text-center drop-shadow-sm select-none mt-1 font-inter">
+                {skill.name}
+              </span>
+            </div>
           </div>
         ))}
       </div>
