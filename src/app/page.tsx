@@ -3,6 +3,7 @@ import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import ProjectCard from "@/components/ProjectCard";
 import ResumeCard from "@/components/ResumeCard";
+import { motion } from "framer-motion";
 
 const skills = [
   { name: "Python", logo: "/python-logo.svg" },
@@ -142,22 +143,45 @@ export default function Home() {
       <div className="orb-bg" style={{top: '-120px', right: '-120px', width: '320px', height: '320px', background: 'radial-gradient(circle at 70% 30%, #7c3aed 0%, transparent 70%)'}} />
       <div className="orb-bg" style={{bottom: '-120px', left: '-120px', width: '320px', height: '320px', background: 'radial-gradient(circle at 30% 70%, #2563eb 0%, transparent 70%)'}} />
       {/* Hero Section */}
-      <section className="flex flex-col md:flex-row items-center justify-between gap-10 px-6 py-20 max-w-5xl mx-auto">
+      <motion.section
+        initial={{ opacity: 0, y: 40 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8, ease: "easeOut" }}
+        className="flex flex-col md:flex-row items-center justify-between gap-10 px-6 py-20 max-w-5xl mx-auto"
+      >
         <div className="flex-1 flex flex-col gap-6">
-          <h1 className="text-4xl md:text-5xl font-bold leading-tight">
-            Hello, I'm <span className="text-violet">Martin Brzeziński</span>
-          </h1>
-          <p className="text-lg md:text-xl text-white/80 max-w-lg">
+          <motion.h1
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2, duration: 0.7, ease: "easeOut" }}
+            className="text-4xl md:text-5xl font-bold leading-tight"
+          >
+            Hello, I'm <span className="bg-gradient-to-r from-blue-400 via-violet-500 to-purple-500 bg-clip-text text-transparent">Martin Brzeziński</span>
+          </motion.h1>
+          <motion.p
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.4, duration: 0.7, ease: "easeOut" }}
+            className="text-lg md:text-xl text-white/80 max-w-lg"
+          >
             I'm a Junior Python Developer & WordPress Webmaster specializing in building modern web applications and dynamic websites.
-          </p>
-          <a
+          </motion.p>
+          <motion.a
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.6, duration: 0.7, ease: "easeOut" }}
             href="#contact"
             className="inline-block mt-4 px-6 py-3 rounded-full bg-gradient-to-r from-violet to-purple text-white font-semibold shadow-lg hover:scale-105 transition-transform"
           >
             Get In Touch
-          </a>
+          </motion.a>
         </div>
-        <div className="flex-1 flex justify-center">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.8, duration: 0.7, ease: "easeOut" }}
+          className="flex-1 flex justify-center"
+        >
           <div className="rounded-full bg-gradient-to-br from-violet to-purple p-1 shadow-2xl">
             <Image
               src="/me.png"
@@ -168,36 +192,61 @@ export default function Home() {
               priority
             />
           </div>
-        </div>
-      </section>
+        </motion.div>
+      </motion.section>
 
       {/* Skills Carousel */}
-      <section className="max-w-5xl mx-auto w-full mb-12">
+      <motion.section
+        initial={{ opacity: 0, y: 40 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.3 }}
+        transition={{ duration: 0.7, ease: "easeOut" }}
+        className="max-w-5xl mx-auto w-full mb-12"
+      >
         <SkillsCarousel />
-      </section>
+      </motion.section>
 
       {/* Projects Section */}
-      <section className="relative z-10 max-w-5xl mx-auto px-6 py-12">
+      <motion.section
+        initial={{ opacity: 0, y: 40 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.3 }}
+        transition={{ duration: 0.7, ease: "easeOut" }}
+        className="relative z-10 max-w-5xl mx-auto px-6 py-12"
+      >
         <h2 className="text-2xl md:text-3xl font-bold mb-8 text-blue-400 tracking-widest uppercase">Projects</h2>
         <div className="grid md:grid-cols-2 gap-8">
           {projects.map((project) => (
             <ProjectCard key={project.title} project={project} />
           ))}
         </div>
-      </section>
+      </motion.section>
 
       {/* Resume Timeline Section */}
-      <section className="relative z-10 max-w-5xl mx-auto px-6 py-12">
+      <motion.section
+        initial={{ opacity: 0, y: 40 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.3 }}
+        transition={{ duration: 0.7, ease: "easeOut" }}
+        className="relative z-10 max-w-5xl mx-auto px-6 py-12"
+      >
         <h2 className="text-2xl md:text-3xl font-bold mb-8 text-violet-400 tracking-widest uppercase">Resume</h2>
         <div className="flex flex-col gap-12">
           {resumeTimeline.map((item, idx) => (
             <ResumeCard key={idx} item={item} idx={idx} isLast={idx >= resumeTimeline.length - 2} />
           ))}
         </div>
-      </section>
+      </motion.section>
 
       {/* Contact Section */}
-      <section id="contact" className="max-w-3xl mx-auto px-6 py-12">
+      <motion.section
+        id="contact"
+        initial={{ opacity: 0, y: 40 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.3 }}
+        transition={{ duration: 0.7, ease: "easeOut" }}
+        className="max-w-3xl mx-auto px-6 py-12"
+      >
         <h2 className="text-2xl md:text-3xl font-bold mb-6 text-violet">Contact</h2>
         <form
           action="https://formspree.io/f/xgvydjyj"
@@ -232,10 +281,16 @@ export default function Home() {
             Send Message
           </button>
         </form>
-      </section>
+      </motion.section>
 
       {/* Socials Section */}
-      <section className="w-full flex flex-col items-center justify-center py-8">
+      <motion.section
+        initial={{ opacity: 0, y: 40 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.3 }}
+        transition={{ duration: 0.7, ease: "easeOut" }}
+        className="w-full flex flex-col items-center justify-center py-8"
+      >
         <h2 className="text-xl font-bold mb-4 text-violet-300">Find me on</h2>
         <div className="flex gap-6">
           {/* GitHub */}
@@ -257,7 +312,7 @@ export default function Home() {
             </svg>
           </a>
         </div>
-      </section>
+      </motion.section>
 
       <footer className="w-full text-center text-white/50 py-8 text-sm z-20 relative">
         Made with ❤️ by Martin Brzeziński
