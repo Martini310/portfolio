@@ -106,7 +106,7 @@ const resumeTimeline = [
   },
 ];
 
-const TAGLINE = "Turning ideas into beautiful, functional web experiences.";
+const TAGLINE = "  Turning ideas into beautiful, functional web experiences.";
 
 function useTypingEffect(text: string, speed = 40) {
   const [displayed, setDisplayed] = useState("");
@@ -116,7 +116,7 @@ function useTypingEffect(text: string, speed = 40) {
     const interval = setInterval(() => {
       setDisplayed((prev) => prev + text[i]);
       i++;
-      if (i >= text.length) clearInterval(interval);
+      if (i >= text.length - 1) clearInterval(interval);
     }, speed);
     return () => clearInterval(interval);
   }, [text, speed]);
@@ -185,7 +185,7 @@ export default function Home() {
             className="text-violet-200 text-lg md:text-xl font-mono min-h-[2.5rem]"
             aria-label="Tagline"
           >
-            {useTypingEffect(TAGLINE, 30)}<span className="animate-pulse">|</span>
+            {useTypingEffect(TAGLINE, 50)}<span className="animate-pulse">|</span>
           </motion.div>
           <motion.p
             initial={{ opacity: 0, y: 30 }}
