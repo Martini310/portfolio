@@ -6,21 +6,21 @@ import ResumeCard from "@/components/ResumeCard";
 import { motion } from "framer-motion";
 
 const skills = [
+  { name: "SQLite", logo: "/sqlite-logo.svg" },
   { name: "Python", logo: "/python-logo.svg" },
   { name: "JavaScript", logo: "/js-logo.svg" },
   { name: "PHP", logo: "/php-logo.svg" },
-  { name: "HTML", logo: "/html-logo.svg" },
-  { name: "CSS", logo: "/css-logo.svg" },
-  { name: "Next.js", logo: "/nextjs-logo.svg" },
-  { name: "WordPress", logo: "/wp-logo.svg" },
-  { name: "WooCommerce", logo: "/woo-logo.svg" },
   { name: "Django", logo: "/django-logo.svg" },
   { name: "Django REST Framework", logo: "/drf-logo.svg" },
+  { name: "HTML", logo: "/html-logo.svg" },
+  { name: "CSS", logo: "/css-logo.svg" },
+  { name: "WordPress", logo: "/wp-logo.svg" },
+  { name: "WooCommerce", logo: "/woo-logo.svg" },
+  { name: "Next.js", logo: "/nextjs-logo.svg" },
   { name: "React", logo: "/react-logo.svg" },
   { name: "Postman", logo: "/postman-logo.svg" },
   { name: "Docker", logo: "/docker-logo.svg" },
   { name: "Git", logo: "/git-logo.svg" },
-  { name: "SQLite", logo: "/sqlite-logo.svg" }
 ];
 
 const projects = [
@@ -167,7 +167,7 @@ function SkillsCarousel() {
 
   return (
     <div
-      className="w-full overflow-hidden py-4 group"
+      className="w-full overflow-hidden py-6 group"
       style={{
         WebkitMaskImage:
           "linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%)",
@@ -185,14 +185,16 @@ function SkillsCarousel() {
             className="group/logo flex flex-col items-center min-w-[160px]"
           >
             <div
-              className="transition-transform duration-300 rounded-2xl bg-[#181f3a]/80 border border-violet-500/30 group-hover/logo:border-violet-400 group-hover/logo:shadow-[0_0_12px_2px_rgba(139,92,246,0.4)] w-32 h-32 flex flex-col items-center justify-center scale-100 group-hover/logo:scale-125"
+              className="transition-transform duration-700 ease-in-out rounded-2xl bg-[#181f3a]/80 border border-violet-500/30 group-hover/logo:border-violet-400 group-hover/logo:shadow-[0_0_12px_2px_rgba(139,92,246,0.4)] w-32 h-32 flex flex-col items-center justify-center scale-100 group-hover/logo:scale-120 relative overflow-hidden"
             >
+              {/* Top border glow */}
+              <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[90%] h-[6px] bg-gradient-to-r from-blue-400 via-violet-400 to-purple-400 rounded-t-2xl blur-md opacity-60 pointer-events-none z-10" />
               <Image
                 src={skill.logo}
                 alt={skill.name}
                 width={56}
                 height={56}
-                className="transition-transform duration-300 group-hover/logo:scale-110 group-hover/logo:rotate-3 mb-2"
+                className="transition-transform duration-700 ease-in-out group-hover/logo:scale-120 group-hover/logo:rotate-10 mb-2"
               />
               <span className="text-sm text-white font-semibold text-center drop-shadow-sm select-none mt-1 font-inter">
                 {skill.name}
