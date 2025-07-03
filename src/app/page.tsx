@@ -32,7 +32,8 @@ const projects = [
       { name: "Python", logo: "/python-logo.svg" },
       { name: "Django", logo: "/django-logo.svg" },
       { name: "DRF", logo: "/drf-logo.svg" },
-      { name: "Next.js", logo: "/nextjs-logo.svg" }
+      { name: "Next.js", logo: "/nextjs-logo.svg" },
+      { name: "Docker", logo: "/docker-logo.svg" }
     ]
   },
   {
@@ -62,10 +63,9 @@ const projects = [
     tech: [
       { name: "Next.js", logo: "/nextjs-logo.svg" },
       { name: "React", logo: "/react-logo.svg" },
-      { name: "Tailwind CSS", logo: "/css-logo.svg" },
+      { name: "Tailwind CSS", logo: "/tailwind-logo.svg" },
+      { name: "TypeScript", logo: "/typescript-logo.svg" },
       { name: "Framer Motion", logo: "/react-logo.svg" },
-      { name: "TypeScript", logo: "/js-logo.svg" },
-      { name: "Docker", logo: "/docker-logo.svg" }
     ],
   },
   {
