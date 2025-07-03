@@ -1,4 +1,5 @@
 import React, { useState, useRef } from "react";
+import { motion } from 'framer-motion';
 
 type ResumeItem = {
   date: string;
@@ -40,9 +41,14 @@ const ResumeCard: React.FC<ResumeCardProps> = ({ item, idx, isLast }) => {
         )}
       </div>
       {/* Card Content */}
-      <div
+      <motion.div
         ref={cardRef}
-        className="resume-card flex-1 bg-[#10162a]/80 rounded-2xl p-8 shadow-md border border-transparent transition-all duration-200 group-hover:shadow-violet-500/30 group-hover:border-violet-500/40"
+        initial={{ opacity: 0, y: 40 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.2 }}
+        whileHover={{ scale: 1.025, rotateX: 2, rotateY: -2 }}
+        transition={{ type: 'spring', stiffness: 200, damping: 20 }}
+        className="resume-card flex-1 relative rounded-2xl p-1 overflow-hidden group"
         onMouseMove={handleMouseMove}
         onMouseLeave={() => {
           const card = cardRef.current;
@@ -51,41 +57,67 @@ const ResumeCard: React.FC<ResumeCardProps> = ({ item, idx, isLast }) => {
             card.style.setProperty('--y', '50%');
           }
         }}
-        style={{ zIndex: 2 }}
+        style={{ zIndex: 2, '--x': '50%', '--y': '50%' } as React.CSSProperties}
       >
-        <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-2 gap-2">
-          <span className="text-blue-400 font-semibold text-sm md:text-base">{item.date}</span>
-          <span className="text-blue-300 font-medium text-xs md:text-base">{item.company}</span>
-        </div>
-        <div className="text-lg font-bold mb-2 text-violet-200">{item.title}</div>
-        {item.competences && (
-          <div className="flex flex-wrap gap-2 mb-3">
-            {item.competences.map((comp) => (
-              <span
-                key={comp}
-                className="inline-block px-3 py-1 rounded-full bg-gradient-to-r from-blue-700 to-violet-600 text-xs font-semibold text-white shadow-sm border border-blue-500/30 hover:scale-105 transition-transform"
-              >
-                {comp}
-              </span>
-            ))}
+        {/* Animated gradient glow border */}
+        <motion.div
+          className="absolute inset-0 rounded-2xl pointer-events-none z-0"
+          animate={{
+            background:
+              'radial-gradient(ellipse 80% 60% at var(--x,50%) var(--y,50%), rgba(139,92,246,0.18), transparent 80%)',
+          }}
+          transition={{ duration: 0.3 }}
+        />
+        {/* Glassmorphism background with animated gradient */}
+        <div className="relative rounded-2xl bg-[#10162a]/80 backdrop-blur-md p-7 flex flex-col min-h-[100%] z-10 border border-white/5 before:absolute before:inset-0 before:rounded-2xl before:bg-[radial-gradient(circle_at_20%_20%,rgba(139,92,246,0.08)_0%,transparent_60%),radial-gradient(circle_at_80%_80%,rgba(59,130,246,0.08)_0%,transparent_60%)] before:animate-move-pattern before:z-0 before:pointer-events-none">
+          <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-2 gap-2">
+            <span className="text-blue-400 font-semibold text-sm md:text-base font-inter">{item.date}</span>
+            <span className="text-blue-300 font-medium text-xs md:text-base font-inter">{item.company}</span>
           </div>
-        )}
-        <div
-          className={`text-white/80 overflow-hidden transition-all duration-800 ease-in-out ${expanded ? 'max-h-96 opacity-100' : 'max-h-19 opacity-80'}`}
-          style={{ position: 'relative' }}
-        >
-          <span>{expanded || !isLong ? item.description : shortDesc}</span>
-          {isLong && (
-            <button
-              className="ml-2 text-violet-400 underline cursor-pointer text-sm font-semibold hover:text-violet-300 transition-colors absolute bottom-0 right-0 bg-[#10162a]/80 px-1"
-              style={{ zIndex: 2 }}
-              onClick={() => setExpanded((v) => !v)}
-            >
-              {expanded ? "Less" : "Read more"}
-            </button>
+          <div className="text-xl md:text-2xl font-extrabold font-inter bg-gradient-to-r from-blue-400 via-violet-400 to-purple-400 bg-clip-text text-transparent drop-shadow-md mb-2">
+            {item.title}
+          </div>
+          {item.competences && (
+            <div className="flex flex-wrap gap-2 mb-3">
+              {item.competences.map((comp) => (
+                <span
+                  key={comp}
+                  className="inline-block px-3 py-1 rounded-full bg-gradient-to-r from-blue-700 to-violet-600 text-xs font-semibold text-white shadow-sm border border-blue-500/30 hover:scale-105 transition-transform font-inter"
+                >
+                  {comp}
+                </span>
+              ))}
+            </div>
           )}
+          <div
+            className={`text-white/80 overflow-hidden transition-all duration-800 ease-in-out font-inter text-shadow-sm ${expanded ? 'max-h-96 opacity-100' : 'max-h-19 opacity-80'}`}
+            style={{ position: 'relative' }}
+          >
+            <span>{expanded || !isLong ? item.description : shortDesc}</span>
+            {isLong && (
+              <button
+                className="ml-2 text-violet-400 underline cursor-pointer text-sm font-semibold hover:text-violet-300 transition-colors absolute bottom-0 right-0 bg-[#10162a]/80 px-1"
+                style={{ zIndex: 2 }}
+                onClick={() => setExpanded((v) => !v)}
+              >
+                {expanded ? "Less" : "Read more"}
+              </button>
+            )}
+          </div>
         </div>
-      </div>
+        <style jsx>{`
+          .text-shadow-sm {
+            text-shadow: 0 1px 4px rgba(0,0,0,0.18);
+          }
+          .before\:animate-move-pattern::before {
+            animation: movePattern 8s linear infinite alternate;
+          }
+          @keyframes movePattern {
+            0% { background-position: 0% 0%, 100% 100%; }
+            100% { background-position: 100% 100%, 0% 0%; }
+          }
+        `}</style>
+      </motion.div>
     </div>
   );
 };

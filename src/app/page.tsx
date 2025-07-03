@@ -145,12 +145,18 @@ function useTypingEffect(text: string, speed = 40) {
   useEffect(() => {
     setDisplayed("");
     let i = 0;
-    const interval = setInterval(() => {
-      setDisplayed((prev) => prev + text[i]);
-      i++;
-      if (i >= text.length - 1) clearInterval(interval);
-    }, speed);
-    return () => clearInterval(interval);
+    let interval: NodeJS.Timeout | null = null;
+    const timeout = setTimeout(() => {
+      interval = setInterval(() => {
+        setDisplayed((prev) => prev + text[i]);
+        i++;
+        if (i >= text.length - 1 && interval) clearInterval(interval);
+      }, speed);
+    }, 1800); // 0.5s delay before typing starts
+    return () => {
+      clearTimeout(timeout);
+      if (interval) clearInterval(interval);
+    };
   }, [text, speed]);
   return displayed;
 }
@@ -179,7 +185,7 @@ function SkillsCarousel() {
             className="group/logo flex flex-col items-center min-w-[160px]"
           >
             <div
-              className="transition-transform duration-300 rounded-2xl bg-[#181f3a]/80 border border-violet-500/30 group-hover/logo:border-violet-400 group-hover/logo:shadow-[0_0_12px_2px_rgba(139,92,246,0.4)] w-32 h-32 flex flex-col items-center justify-center scale-100 group-hover/logo:scale-105"
+              className="transition-transform duration-300 rounded-2xl bg-[#181f3a]/80 border border-violet-500/30 group-hover/logo:border-violet-400 group-hover/logo:shadow-[0_0_12px_2px_rgba(139,92,246,0.4)] w-32 h-32 flex flex-col items-center justify-center scale-100 group-hover/logo:scale-125"
             >
               <Image
                 src={skill.logo}
@@ -209,7 +215,7 @@ export default function Home() {
       <motion.section
         initial={{ opacity: 0, y: 40 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, ease: "easeOut" }}
+        transition={{ duration: 1.2, delay: 0.8, ease: "easeOut" }}
         className="relative flex flex-col md:flex-row items-center justify-between gap-10 px-6 py-20 max-w-5xl mx-auto"
       >
         {/* Blurred orb background */}
@@ -227,16 +233,16 @@ export default function Home() {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3, duration: 0.7, ease: "easeOut" }}
+            transition={{ delay: 1.5, duration: 0.9, ease: "easeOut" }}
             className="text-violet-200 text-lg md:text-xl font-mono min-h-[2.5rem]"
             aria-label="Tagline"
           >
-            {useTypingEffect(TAGLINE, 50)}<span className="animate-pulse">|</span>
+            {useTypingEffect(TAGLINE, 60)}<span className="animate-pulse">|</span>
           </motion.div>
           <motion.p
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.4, duration: 0.7, ease: "easeOut" }}
+            transition={{ delay: 1.0, duration: 0.7, ease: "easeOut" }}
             className="text-lg md:text-xl text-white/80 max-w-lg"
           >
             I'm a Junior Python Developer & WordPress Webmaster specializing in building modern web applications and dynamic websites.
@@ -286,7 +292,7 @@ export default function Home() {
         initial={{ opacity: 0, y: 40 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.3 }}
-        transition={{ duration: 0.7, ease: "easeOut" }}
+        transition={{ delay: 1.8, duration: 0.7, ease: "easeOut" }}
         className="max-w-5xl mx-auto w-full mb-12"
       >
         <SkillsCarousel />
