@@ -68,6 +68,17 @@ const projects = [
       { name: "Docker", logo: "/docker-logo.svg" }
     ],
   },
+  {
+    title: "Trip Cost Calc",
+    description: "A Python Kivy app to calculate car trip costs based on real-time fuel prices, weather, and route info.",
+    link: "/projects/trip-cost-calc",
+    tech: [
+      { name: "Python", logo: "/python-logo.svg" },
+      { name: "Kivy", logo: "/python-logo.svg" },
+      { name: "Google Maps API", logo: "/globe.svg" },
+      { name: "OpenWeatherMap API", logo: "/globe.svg" }
+    ]
+  },
 ];
 
 // Resume timeline data
