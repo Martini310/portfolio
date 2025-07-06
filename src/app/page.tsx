@@ -349,7 +349,7 @@ export default function Home() {
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.7, duration: 0.7, ease: "easeOut" }}
-                href="/cv.pdf" download
+                href="/mb_resume.pdf" download
                 className="inline-block px-6 py-3 rounded-full bg-gradient-to-r from-blue-500 to-violet-500 text-white font-semibold shadow-lg hover:scale-105 transition-transform border border-blue-400/30"
               >
                 {buttonIcons.download}
