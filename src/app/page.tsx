@@ -238,8 +238,11 @@ export default function Home() {
       let opacity = 0;
       if (y > 50) opacity = 0.1;
       if (y > 60) opacity = 0.2;
+      if (y > 70) opacity = 0.3;
       if (y > 80) opacity = 0.4;
+      if (y > 90) opacity = 0.5;
       if (y > 100) opacity = 0.6;
+      if (y > 115) opacity = 0.7;
       if (y > 130) opacity = 0.8;
       setHeaderOpacity(opacity);
     };
