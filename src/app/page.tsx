@@ -194,7 +194,7 @@ function SkillsCarousel() {
                 alt={skill.name}
                 width={56}
                 height={56}
-                className="transition-transform duration-700 ease-in-out group-hover/logo:scale-120 group-hover/logo:rotate-10 mb-2"
+                className="transition-transform duration-700 ease-in-out rounded-xl group-hover/logo:scale-120 group-hover/logo:rotate-10 mb-2"
               />
               <span className="text-sm text-white font-semibold text-center drop-shadow-sm select-none mt-1 font-inter">
                 {skill.name}
@@ -312,7 +312,7 @@ export default function Home() {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2, duration: 0.7, ease: "easeOut" }}
-              className="text-4xl md:text-5xl font-bold leading-tight"
+              className="text-4xl text-white/90 md:text-5xl font-bold leading-tight"
             >
               Hello, I'm <span className="bg-gradient-to-r from-blue-400 via-violet-500 to-purple-500 bg-clip-text text-transparent">Martin Brzeziński</span>
             </motion.h1>
@@ -431,7 +431,7 @@ export default function Home() {
           transition={{ duration: 0.7, ease: "easeOut" }}
           className="max-w-3xl mx-auto px-6 py-12"
         >
-          <h2 className="text-2xl md:text-3xl font-bold mb-6 text-violet">Contact</h2>
+          <h2 className="text-2xl text-blue-400 md:text-3xl font-bold mb-6 text-violet">Contact</h2>
           <form
             action="https://formspree.io/f/xgvydjyj"
             method="POST"
