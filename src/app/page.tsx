@@ -1,9 +1,9 @@
 "use client";
 import Image from "next/image";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import ProjectCard from "@/components/ProjectCard";
 import ResumeCard from "@/components/ResumeCard";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 
 const skills = [
   { name: "SQLite", logo: "/sqlite-logo.svg" },
@@ -230,8 +230,6 @@ export default function Home() {
     { id: "contact", label: "Contact" },
   ];
 
-  // Track active section for highlight
-  const [active, setActive] = useState("home");
   const [headerOpacity, setHeaderOpacity] = useState(0);
   useEffect(() => {
     const handleScroll = () => {
@@ -240,7 +238,6 @@ export default function Home() {
         return el ? el.getBoundingClientRect().top : Infinity;
       });
       const idx = offsets.findIndex((top) => top > 0) - 1;
-      setActive(sections[Math.max(0, idx)].id);
       // Opacity: 0 at 0px, 0.1 at 50px, 0.2 at 60px, up to 0.8 at 130px+
       const y = window.scrollY;
       let opacity = 0;
@@ -314,7 +311,7 @@ export default function Home() {
               transition={{ delay: 0.2, duration: 0.7, ease: "easeOut" }}
               className="text-4xl text-white/90 md:text-5xl font-bold leading-tight"
             >
-              Hello, I'm <span className="bg-gradient-to-r from-blue-400 via-violet-500 to-purple-500 bg-clip-text text-transparent">Martin Brzeziński</span>
+              Hello, I&apos;m <span className="bg-gradient-to-r from-blue-400 via-violet-500 to-purple-500 bg-clip-text text-transparent">Martin Brzeziński</span>
             </motion.h1>
             {/* Tagline with typing effect */}
             <motion.div
@@ -332,7 +329,7 @@ export default function Home() {
               transition={{ delay: 1.0, duration: 0.7, ease: "easeOut" }}
               className="text-lg md:text-xl text-white/80 max-w-lg"
             >
-              I'm a Junior Python Developer & WordPress Webmaster specializing in building modern web applications and dynamic websites.
+              I&apos;m a Junior Python Developer & WordPress Webmaster specializing in building modern web applications and dynamic websites.
             </motion.p>
             <div className="flex gap-4 mt-2">
               <motion.a

@@ -94,7 +94,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
           </motion.a>
           {/* Tech icons */}
           <div className="flex gap-3 ml-auto">
-            {project.tech?.map((tech, i) => (
+            {project.tech?.map((tech) => (
               <div key={tech.name} className="relative flex flex-col items-center">
                 <img
                   src={tech.logo}
