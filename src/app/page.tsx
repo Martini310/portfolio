@@ -233,11 +233,6 @@ export default function Home() {
   const [headerOpacity, setHeaderOpacity] = useState(0);
   useEffect(() => {
     const handleScroll = () => {
-      const offsets = sections.map(({ id }) => {
-        const el = document.getElementById(id);
-        return el ? el.getBoundingClientRect().top : Infinity;
-      });
-      const idx = offsets.findIndex((top) => top > 0) - 1;
       // Opacity: 0 at 0px, 0.1 at 50px, 0.2 at 60px, up to 0.8 at 130px+
       const y = window.scrollY;
       let opacity = 0;
