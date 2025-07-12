@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import ProjectCard from "@/components/ProjectCard";
 import ResumeCard from "@/components/ResumeCard";
 import { motion } from "framer-motion";
+import ThemeToggle from "@/components/ThemeToggle";
 
 const skills = [
   { name: "SQLite", logo: "/sqlite-logo.svg" },
@@ -277,51 +278,56 @@ export default function Home() {
         <nav className="max-w-7xl mx-auto flex items-center justify-between px-4 sm:px-6 lg:px-10 py-4 sm:py-5">
           <span className="text-xl sm:text-2xl lg:text-3xl font-extrabold font-inter bg-gradient-to-r from-teal-300 via-cyan-400 to-blue-400 bg-clip-text text-transparent select-none tracking-tight">Martin Brzeziński</span>
           
-          {/* Desktop Navigation */}
-          <ul className="hidden md:flex gap-8 lg:gap-16">
-            {sections.map((section) => (
-              <li key={section.id}>
-                <a
-                  href={section.id === "home" ? "#" : `#${section.id}`}
-                  className="uppercase tracking-wide font-bold font-inter text-white/90 hover:text-white transition-colors px-2 py-1"
-                  style={{ scrollBehavior: "smooth" }}
-                  onClick={e => handleNavClick(e, section.id)}
-                >
-                  {section.label}
-                </a>
-              </li>
-            ))}
-          </ul>
+          <div className="flex items-center gap-4">
+            {/* Desktop Navigation */}
+            <ul className="hidden md:flex gap-8 lg:gap-16">
+              {sections.map((section) => (
+                <li key={section.id}>
+                  <a
+                    href={section.id === "home" ? "#" : `#${section.id}`}
+                    className="uppercase tracking-wide font-bold font-inter text-white/90 hover:text-white transition-colors px-2 py-1"
+                    style={{ scrollBehavior: "smooth" }}
+                    onClick={e => handleNavClick(e, section.id)}
+                  >
+                    {section.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
 
-          {/* Mobile Menu Button */}
-          <button
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="md:hidden p-2 text-white hover:text-violet-300 transition-colors"
-            aria-label="Toggle mobile menu"
-          >
-            <svg
-              className="w-6 h-6"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
+            {/* Theme Toggle */}
+            <ThemeToggle />
+
+            {/* Mobile Menu Button */}
+            <button
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              className="md:hidden p-2 text-white hover:text-violet-300 transition-colors"
+              aria-label="Toggle mobile menu"
             >
-              {mobileMenuOpen ? (
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M6 18L18 6M6 6l12 12"
-                />
-              ) : (
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M4 6h16M4 12h16M4 18h16"
-                />
-              )}
-            </svg>
-          </button>
+              <svg
+                className="w-6 h-6"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                {mobileMenuOpen ? (
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M6 18L18 6M6 6l12 12"
+                  />
+                ) : (
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M4 6h16M4 12h16M4 18h16"
+                  />
+                )}
+              </svg>
+            </button>
+          </div>
         </nav>
 
         {/* Mobile Navigation Menu */}
@@ -350,8 +356,8 @@ export default function Home() {
       </header>
       <div className="pt-16 sm:pt-20" id="home">
         {/* Glowing Orbs */}
-        <div className="orb-bg" style={{top: '-120px', right: '-120px', width: '320px', height: '320px', background: 'radial-gradient(circle at 70% 30%, #7c3aed 0%, transparent 70%)'}} />
-        <div className="orb-bg" style={{bottom: '-120px', left: '-120px', width: '320px', height: '320px', background: 'radial-gradient(circle at 30% 70%, #2563eb 0%, transparent 70%)'}} />
+        <div className="orb-bg" style={{top: '-120px', right: '-120px', width: '320px', height: '320px', background: 'radial-gradient(circle at 70% 30%, var(--accent-secondary) 0%, transparent 70%)'}} />
+        <div className="orb-bg" style={{bottom: '-120px', left: '-120px', width: '320px', height: '320px', background: 'radial-gradient(circle at 30% 70%, var(--accent-primary) 0%, transparent 70%)'}} />
         {/* Hero Section */}
         <motion.section
           id="home"
@@ -361,7 +367,7 @@ export default function Home() {
           className="relative flex flex-col lg:flex-row items-center justify-between gap-8 lg:gap-10 px-4 sm:px-6 py-12 sm:py-16 lg:py-20 max-w-5xl mx-auto"
         >
           {/* Blurred orb background */}
-          <div className="absolute -top-24 -left-32 w-[400px] h-[400px] bg-gradient-to-br from-blue-500 via-violet-500 to-purple-500 rounded-full blur-3xl opacity-30 z-0 pointer-events-none" />
+          <div className="absolute -top-24 -left-32 w-[400px] h-[400px] bg-gradient-to-br from-blue-500 via-violet-500 to-purple-500 rounded-full blur-3xl opacity-30 z-0 pointer-events-none theme-transition" />
           <div className="flex-1 flex flex-col gap-4 sm:gap-6 z-10 text-center lg:text-left">
             <motion.h1
               initial={{ opacity: 0, y: 30 }}
