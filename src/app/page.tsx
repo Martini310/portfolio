@@ -167,7 +167,7 @@ function SkillsCarousel() {
 
   return (
     <div
-      className="w-full overflow-hidden py-6 group"
+      className="w-full overflow-hidden py-4 sm:py-6 group"
       style={{
         WebkitMaskImage:
           "linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%)",
@@ -176,27 +176,27 @@ function SkillsCarousel() {
       }}
     >
       <div
-        className="flex gap-8 animate-carousel group-hover:[animation-play-state:paused]"
-        style={{ width: `${logos.length * 120}px` }}
+        className="flex gap-4 sm:gap-6 lg:gap-8 animate-carousel group-hover:[animation-play-state:paused]"
+        style={{ width: `${logos.length * 100}px` }}
       >
         {logos.map((skill, i) => (
           <div
             key={i}
-            className="group/logo flex flex-col items-center min-w-[160px]"
+            className="group/logo flex flex-col items-center min-w-[120px] sm:min-w-[140px] lg:min-w-[160px]"
           >
             <div
-              className="transition-transform duration-700 ease-in-out rounded-2xl bg-[#181f3a]/80 border border-violet-500/30 group-hover/logo:border-violet-400 group-hover/logo:shadow-[0_0_12px_2px_rgba(139,92,246,0.4)] w-32 h-32 flex flex-col items-center justify-center scale-100 group-hover/logo:scale-120 relative overflow-hidden"
+              className="transition-transform duration-700 ease-in-out rounded-2xl bg-[#181f3a]/80 border border-violet-500/30 group-hover/logo:border-violet-400 group-hover/logo:shadow-[0_0_12px_2px_rgba(139,92,246,0.4)] w-24 h-24 sm:w-28 sm:h-28 lg:w-32 lg:h-32 flex flex-col items-center justify-center scale-100 group-hover/logo:scale-120 relative overflow-hidden"
             >
               {/* Top border glow */}
-              <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[90%] h-[6px] bg-gradient-to-r from-blue-400 via-violet-400 to-purple-400 rounded-t-2xl blur-md opacity-60 pointer-events-none z-10" />
+              <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[90%] h-[4px] sm:h-[6px] bg-gradient-to-r from-blue-400 via-violet-400 to-purple-400 rounded-t-2xl blur-md opacity-60 pointer-events-none z-10" />
               <Image
                 src={skill.logo}
                 alt={skill.name}
-                width={56}
-                height={56}
-                className="transition-transform duration-700 ease-in-out rounded-xl group-hover/logo:scale-120 group-hover/logo:rotate-10 mb-2"
+                width={40}
+                height={40}
+                className="transition-transform duration-700 ease-in-out rounded-xl group-hover/logo:scale-120 group-hover/logo:rotate-10 mb-1 sm:mb-2 w-8 h-8 sm:w-10 sm:h-10 lg:w-14 lg:h-14"
               />
-              <span className="text-sm text-white font-semibold text-center drop-shadow-sm select-none mt-1 font-inter">
+              <span className="text-xs sm:text-sm text-white font-semibold text-center drop-shadow-sm select-none mt-1 font-inter px-1">
                 {skill.name}
               </span>
             </div>
@@ -231,6 +231,8 @@ export default function Home() {
   ];
 
   const [headerOpacity, setHeaderOpacity] = useState(0);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
   useEffect(() => {
     const handleScroll = () => {
       // Opacity: 0 at 0px, 0.1 at 50px, 0.2 at 60px, up to 0.8 at 130px+
@@ -258,6 +260,8 @@ export default function Home() {
       const y = el.getBoundingClientRect().top + window.scrollY - 80; // 80px header offset
       window.scrollTo({ top: y, behavior: 'smooth' });
     }
+    // Close mobile menu after navigation
+    setMobileMenuOpen(false);
   };
 
   return (
@@ -270,9 +274,11 @@ export default function Home() {
           backdropFilter: headerOpacity > 0 ? 'blur(8px)' : 'none',
         }}
       >
-        <nav className="max-w-7xl mx-auto flex items-center justify-between px-10 py-5">
-          <span className="text-3xl font-extrabold font-inter bg-gradient-to-r from-teal-300 via-cyan-400 to-blue-400 bg-clip-text text-transparent select-none tracking-tight">Martin Brzeziński</span>
-          <ul className="flex gap-16">
+        <nav className="max-w-7xl mx-auto flex items-center justify-between px-4 sm:px-6 lg:px-10 py-4 sm:py-5">
+          <span className="text-xl sm:text-2xl lg:text-3xl font-extrabold font-inter bg-gradient-to-r from-teal-300 via-cyan-400 to-blue-400 bg-clip-text text-transparent select-none tracking-tight">Martin Brzeziński</span>
+          
+          {/* Desktop Navigation */}
+          <ul className="hidden md:flex gap-8 lg:gap-16">
             {sections.map((section) => (
               <li key={section.id}>
                 <a
@@ -286,9 +292,63 @@ export default function Home() {
               </li>
             ))}
           </ul>
+
+          {/* Mobile Menu Button */}
+          <button
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            className="md:hidden p-2 text-white hover:text-violet-300 transition-colors"
+            aria-label="Toggle mobile menu"
+          >
+            <svg
+              className="w-6 h-6"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              {mobileMenuOpen ? (
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M6 18L18 6M6 6l12 12"
+                />
+              ) : (
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M4 6h16M4 12h16M4 18h16"
+                />
+              )}
+            </svg>
+          </button>
         </nav>
+
+        {/* Mobile Navigation Menu */}
+        {mobileMenuOpen && (
+          <motion.div
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            className="md:hidden bg-[#0a0f2c]/95 backdrop-blur-md border-t border-white/10"
+          >
+            <ul className="flex flex-col py-4">
+              {sections.map((section) => (
+                <li key={section.id}>
+                  <a
+                    href={section.id === "home" ? "#" : `#${section.id}`}
+                    className="block px-6 py-3 uppercase tracking-wide font-bold font-inter text-white/90 hover:text-white hover:bg-white/5 transition-colors"
+                    onClick={e => handleNavClick(e, section.id)}
+                  >
+                    {section.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </motion.div>
+        )}
       </header>
-      <div className="pt-20" id="home">
+      <div className="pt-16 sm:pt-20" id="home">
         {/* Glowing Orbs */}
         <div className="orb-bg" style={{top: '-120px', right: '-120px', width: '320px', height: '320px', background: 'radial-gradient(circle at 70% 30%, #7c3aed 0%, transparent 70%)'}} />
         <div className="orb-bg" style={{bottom: '-120px', left: '-120px', width: '320px', height: '320px', background: 'radial-gradient(circle at 30% 70%, #2563eb 0%, transparent 70%)'}} />
@@ -298,16 +358,16 @@ export default function Home() {
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1.2, delay: 0.8, ease: "easeOut" }}
-          className="relative flex flex-col md:flex-row items-center justify-between gap-10 px-6 py-20 max-w-5xl mx-auto"
+          className="relative flex flex-col lg:flex-row items-center justify-between gap-8 lg:gap-10 px-4 sm:px-6 py-12 sm:py-16 lg:py-20 max-w-5xl mx-auto"
         >
           {/* Blurred orb background */}
           <div className="absolute -top-24 -left-32 w-[400px] h-[400px] bg-gradient-to-br from-blue-500 via-violet-500 to-purple-500 rounded-full blur-3xl opacity-30 z-0 pointer-events-none" />
-          <div className="flex-1 flex flex-col gap-6 z-10">
+          <div className="flex-1 flex flex-col gap-4 sm:gap-6 z-10 text-center lg:text-left">
             <motion.h1
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2, duration: 0.7, ease: "easeOut" }}
-              className="text-4xl text-white/90 md:text-5xl font-bold leading-tight"
+              className="text-3xl sm:text-4xl lg:text-5xl text-white/90 font-bold leading-tight"
             >
               Hello, I&apos;m <span className="bg-gradient-to-r from-blue-400 via-violet-500 to-purple-500 bg-clip-text text-transparent">Martin Brzeziński</span>
             </motion.h1>
@@ -316,7 +376,7 @@ export default function Home() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 1.5, duration: 0.9, ease: "easeOut" }}
-              className="text-violet-200 text-lg md:text-xl font-mono min-h-[2.5rem]"
+              className="text-violet-200 text-base sm:text-lg lg:text-xl font-mono min-h-[2.5rem]"
               aria-label="Tagline"
             >
               {useTypingEffect(TAGLINE, 60)}<span className="animate-pulse">|</span>
@@ -325,17 +385,17 @@ export default function Home() {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 1.0, duration: 0.7, ease: "easeOut" }}
-              className="text-lg md:text-xl text-white/80 max-w-lg"
+              className="text-base sm:text-lg lg:text-xl text-white/80 max-w-lg mx-auto lg:mx-0"
             >
               I&apos;m a Junior Python Developer & WordPress Webmaster specializing in building modern web applications and dynamic websites.
             </motion.p>
-            <div className="flex gap-4 mt-2">
+            <div className="flex flex-col sm:flex-row gap-4 mt-2 justify-center lg:justify-start">
               <motion.a
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.6, duration: 0.7, ease: "easeOut" }}
                 href="#contact"
-                className="inline-block px-6 py-3 rounded-full bg-gradient-to-r from-violet-500 to-purple-500 text-white font-semibold shadow-lg hover:scale-105 transition-transform"
+                className="inline-block px-6 py-3 rounded-full bg-gradient-to-r from-violet-500 to-purple-500 text-white font-semibold shadow-lg hover:scale-105 transition-transform text-center"
               >
                 {buttonIcons.getInTouch}
                 Get In Touch
@@ -345,7 +405,7 @@ export default function Home() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.7, duration: 0.7, ease: "easeOut" }}
                 href="/mb_resume.pdf" download
-                className="inline-block px-6 py-3 rounded-full bg-gradient-to-r from-blue-500 to-violet-500 text-white font-semibold shadow-lg hover:scale-105 transition-transform border border-blue-400/30"
+                className="inline-block px-6 py-3 rounded-full bg-gradient-to-r from-blue-500 to-violet-500 text-white font-semibold shadow-lg hover:scale-105 transition-transform border border-blue-400/30 text-center"
               >
                 {buttonIcons.download}
                 Download CV
@@ -356,15 +416,15 @@ export default function Home() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.8, duration: 0.7, ease: "easeOut" }}
-            className="flex-1 flex justify-center z-10"
+            className="flex-1 flex justify-center lg:justify-end z-10 mt-8 lg:mt-0"
           >
             <div className="rounded-full bg-gradient-to-br from-violet to-purple p-1 shadow-2xl">
               <Image
                 src="/me.png"
                 alt="Profile photo"
-                width={180}
-                height={180}
-                className="rounded-full object-cover border-4 border-deep-blue"
+                width={150}
+                height={150}
+                className="rounded-full object-cover border-4 border-deep-blue w-[120px] h-[120px] sm:w-[150px] sm:h-[150px] lg:w-[180px] lg:h-[180px]"
                 priority
               />
             </div>
@@ -378,7 +438,7 @@ export default function Home() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.3 }}
           transition={{ delay: 1.8, duration: 0.7, ease: "easeOut" }}
-          className="max-w-5xl mx-auto w-full mb-12"
+          className="max-w-5xl mx-auto w-full mb-12 px-4 sm:px-6"
         >
           <SkillsCarousel />
         </motion.section>
@@ -390,10 +450,10 @@ export default function Home() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 0.7, ease: "easeOut" }}
-          className="relative z-10 max-w-5xl mx-auto px-6 py-12"
+          className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 py-12"
         >
-          <h2 className="text-2xl md:text-3xl font-bold mb-8 text-blue-400 tracking-widest uppercase">Projects</h2>
-          <div className="grid md:grid-cols-2 gap-8">
+          <h2 className="text-2xl md:text-3xl font-bold mb-8 text-blue-400 tracking-widest uppercase text-center lg:text-left">Projects</h2>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8">
             {projects.map((project) => (
               <ProjectCard key={project.title} project={project} />
             ))}
@@ -407,10 +467,10 @@ export default function Home() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 0.7, ease: "easeOut" }}
-          className="relative z-10 max-w-5xl mx-auto px-6 py-12"
+          className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 py-12"
         >
-          <h2 className="text-2xl md:text-3xl font-bold mb-8 text-violet-400 tracking-widest uppercase">Resume</h2>
-          <div className="flex flex-col gap-12">
+          <h2 className="text-2xl md:text-3xl font-bold mb-8 text-violet-400 tracking-widest uppercase text-center lg:text-left">Resume</h2>
+          <div className="flex flex-col gap-8 lg:gap-12">
             {resumeTimeline.map((item, idx) => (
               <ResumeCard key={idx} item={item} idx={idx} isLast={idx >= resumeTimeline.length - 2} />
             ))}
@@ -424,13 +484,13 @@ export default function Home() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 0.7, ease: "easeOut" }}
-          className="max-w-3xl mx-auto px-6 py-12"
+          className="max-w-3xl mx-auto px-4 sm:px-6 py-12"
         >
-          <h2 className="text-2xl text-blue-400 md:text-3xl font-bold mb-6 text-violet">Contact</h2>
+          <h2 className="text-2xl text-blue-400 md:text-3xl font-bold mb-6 text-violet text-center lg:text-left">Contact</h2>
           <form
             action="https://formspree.io/f/xgvydjyj"
             method="POST"
-            className="bg-gradient-to-br from-deep-blue via-gradient-mid to-gradient-end rounded-xl p-8 shadow-lg flex flex-col gap-6"
+            className="bg-gradient-to-br from-deep-blue via-gradient-mid to-gradient-end rounded-xl p-6 sm:p-8 shadow-lg flex flex-col gap-6"
           >
             <input
               type="text"
@@ -468,32 +528,32 @@ export default function Home() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 0.7, ease: "easeOut" }}
-          className="w-full flex flex-col items-center justify-center py-8"
+          className="w-full flex flex-col items-center justify-center py-8 px-4 sm:px-6"
         >
           <h2 className="text-xl font-bold mb-4 text-violet-300">Find me on</h2>
-          <div className="flex gap-6">
+          <div className="flex gap-4 sm:gap-6">
             {/* GitHub */}
             <a href="https://github.com/Martini310" target="_blank" rel="noopener noreferrer" className="rounded-full bg-gradient-to-br from-blue-500 to-violet-500 p-3 shadow-lg hover:scale-110 transition-transform">
-              <svg className="w-7 h-7 text-white" fill="currentColor" viewBox="0 0 24 24">
+              <svg className="w-6 h-6 sm:w-7 sm:h-7 text-white" fill="currentColor" viewBox="0 0 24 24">
                 <path d="M12 2C6.477 2 2 6.484 2 12.021c0 4.428 2.865 8.184 6.839 9.504.5.092.682-.217.682-.483 0-.237-.009-.868-.014-1.703-2.782.605-3.369-1.342-3.369-1.342-.454-1.157-1.11-1.465-1.11-1.465-.908-.62.069-.608.069-.608 1.004.07 1.532 1.032 1.532 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.339-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.025A9.564 9.564 0 0 1 12 6.844c.85.004 1.705.115 2.504.337 1.909-1.295 2.748-1.025 2.748-1.025.546 1.378.202 2.397.1 2.65.64.7 1.028 1.595 1.028 2.688 0 3.847-2.338 4.695-4.566 4.944.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.749 0 .268.18.579.688.481C19.138 20.203 22 16.447 22 12.021 22 6.484 17.523 2 12 2Z" />
               </svg>
             </a>
             {/* LinkedIn */}
             <a href="https://www.linkedin.com/in/martin-brzeziński-ab714b1b1/" target="_blank" rel="noopener noreferrer" className="rounded-full bg-gradient-to-br from-blue-500 to-violet-500 p-3 shadow-lg hover:scale-110 transition-transform">
-              <svg className="w-7 h-7 text-white" fill="currentColor" viewBox="0 0 24 24">
+              <svg className="w-6 h-6 sm:w-7 sm:h-7 text-white" fill="currentColor" viewBox="0 0 24 24">
                 <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.761 0 5-2.239 5-5v-14c0-2.761-2.239-5-5-5zm-11 19h-3v-10h3v10zm-1.5-11.268c-.966 0-1.75-.784-1.75-1.75s.784-1.75 1.75-1.75 1.75.784 1.75 1.75-.784 1.75-1.75 1.75zm15.5 11.268h-3v-5.604c0-1.337-.025-3.063-1.868-3.063-1.868 0-2.154 1.459-2.154 2.968v5.699h-3v-10h2.881v1.367h.041c.401-.761 1.379-1.563 2.841-1.563 3.039 0 3.6 2.001 3.6 4.599v5.597z" />
               </svg>
             </a>
             {/* Instagram */}
             <a href="https://instagram.com/brzezinski.martinn" target="_blank" rel="noopener noreferrer" className="rounded-full bg-gradient-to-br from-blue-500 to-violet-500 p-3 shadow-lg hover:scale-110 transition-transform">
-              <svg className="w-7 h-7 text-white" fill="currentColor" viewBox="0 0 24 24">
+              <svg className="w-6 h-6 sm:w-7 sm:h-7 text-white" fill="currentColor" viewBox="0 0 24 24">
                 <path d="M12 2.163c3.204 0 3.584.012 4.85.07 1.366.062 2.633.334 3.608 1.308.974.974 1.246 2.241 1.308 3.608.058 1.266.069 1.646.069 4.85s-.012 3.584-.07 4.85c-.062 1.366-.334 2.687-1.308 3.678-.974.974-2.241 1.246-3.608 1.308-1.266.058-1.646.069-4.85.069s-3.584-.012-4.85-.07c-1.366-.062-2.633-.334-3.608-1.308-.974-.974-1.246-2.241-1.308-3.608-.058-1.266-.069-1.646-.069-4.85s.012-3.584.07-4.85c.062-1.366.334-2.687 1.308-3.678.974-.974 2.241-1.246 3.608-1.308 1.266-.058 1.646-.069 4.85-.069zm0-2.163c-3.259 0-3.667.012-4.947.07-1.276.058-2.687.334-3.678 1.325-.991.991-1.267 2.402-1.325 3.678-.058 1.28-.07 1.688-.07 4.947s.012 3.667.07 4.947c.058 1.276.334 2.687 1.325 3.678.991.991 2.402 1.267 3.678 1.325 1.28.058 1.688.07 4.947.07s3.667-.012 4.947-.07c1.276-.058 2.687-.334 3.678-1.325.991-.991 1.267-2.402 1.325-3.678.058-1.28.07-1.688.07-4.947s-.012-3.667-.07-4.947c-.058-1.276-.334-2.687-1.325-3.678-.991-.991-2.402-1.267-3.678-1.325-1.28-.058-1.688-.07-4.947-.07zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zm0 10.162a3.999 3.999 0 1 1 0-7.998 3.999 3.999 0 0 1 0 7.998zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z" />
               </svg>
             </a>
           </div>
         </motion.section>
 
-        <footer className="w-full text-center text-white/50 py-8 text-sm z-20 relative">
+        <footer className="w-full text-center text-white/50 py-8 text-sm z-20 relative px-4 sm:px-6">
           Made with ❤️ by Martin Brzeziński
         </footer>
       </div>

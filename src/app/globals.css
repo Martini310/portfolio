@@ -17,6 +17,8 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
   position: relative;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 body::before {
@@ -120,4 +122,46 @@ body::after {
 
 .inline-block svg{
   display: inline-block;
+}
+
+/* Mobile-specific improvements */
+@media (max-width: 768px) {
+  /* Improve touch targets */
+  button, a {
+    min-height: 44px;
+    min-width: 44px;
+  }
+  
+  /* Reduce animation intensity on mobile for better performance */
+  .project-card:hover,
+  .resume-card:hover {
+    transform: scale(1.02) !important;
+  }
+  
+  /* Improve text readability on mobile */
+  .text-shadow-sm {
+    text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+  }
+  
+  /* Optimize carousel for mobile */
+  .animate-carousel {
+    animation-duration: 20s;
+  }
+}
+
+/* Prevent horizontal scroll on mobile */
+html, body {
+  overflow-x: hidden;
+}
+
+/* Improve focus states for accessibility */
+button:focus,
+a:focus {
+  outline: 2px solid #7c3aed;
+  outline-offset: 2px;
+}
+
+/* Smooth scrolling for all devices */
+html {
+  scroll-behavior: smooth;
 }

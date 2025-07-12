@@ -72,36 +72,36 @@ export default function ProjectCard({ project }: ProjectCardProps) {
         transition={{ duration: 0.3 }}
       />
       {/* Glassmorphism background with animated gradient */}
-      <div className="relative rounded-2xl bg-[#10162a]/80 backdrop-blur-md p-7 flex flex-col min-h-[100%] z-10 border border-white/4 before:absolute before:inset-0 before:rounded-2xl before:bg-[radial-gradient(circle_at_20%_20%,rgba(139,92,246,0.08)_0%,transparent_60%),radial-gradient(circle_at_80%_80%,rgba(59,130,246,0.08)_0%,transparent_60%)] before:animate-move-pattern before:z-0 before:pointer-events-none">
+      <div className="relative rounded-2xl bg-[#10162a]/80 backdrop-blur-md p-4 sm:p-6 lg:p-7 flex flex-col min-h-[100%] z-10 border border-white/4 before:absolute before:inset-0 before:rounded-2xl before:bg-[radial-gradient(circle_at_20%_20%,rgba(139,92,246,0.08)_0%,transparent_60%),radial-gradient(circle_at_80%_80%,rgba(59,130,246,0.08)_0%,transparent_60%)] before:animate-move-pattern before:z-0 before:pointer-events-none">
         {/* Project Title */}
-        <h3 className="text-2xl font-extrabold font-inter bg-gradient-to-r from-blue-300 via-violet-700 to-purple-400 bg-clip-text text-transparent drop-shadow-md mb-2 relative z-10">
+        <h3 className="text-xl sm:text-2xl font-extrabold font-inter bg-gradient-to-r from-blue-300 via-violet-700 to-purple-400 bg-clip-text text-transparent drop-shadow-md mb-2 relative z-10">
           {project.title}
         </h3>
         {/* Description */}
-        <p className="text-white/90 mb-6 font-inter text-base leading-relaxed relative z-10 text-shadow-sm">
+        <p className="text-white/90 mb-4 sm:mb-6 font-inter text-sm sm:text-base leading-relaxed relative z-10 text-shadow-sm">
           {project.description}
         </p>
         {/* Actions & Tech */}
-        <div className="flex items-end justify-between mt-auto gap-4 relative z-10">
+        <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between mt-auto gap-4 relative z-10">
           <motion.a
             href={project.link}
             whileHover={{ scale: 1.08, boxShadow: '0 0 16px 4px #7c3aed55' }}
-            className="relative self-start px-7 py-2 rounded-full bg-gradient-to-r from-blue-500 to-violet-500 text-white font-semibold font-inter shadow-lg overflow-hidden focus:outline-none focus:ring-2 focus:ring-blue-400 z-10 ripple-btn"
+            className="relative self-start px-5 sm:px-7 py-2 rounded-full bg-gradient-to-r from-blue-500 to-violet-500 text-white font-semibold font-inter shadow-lg overflow-hidden focus:outline-none focus:ring-2 focus:ring-blue-400 z-10 ripple-btn text-center sm:text-left"
             tabIndex={0}
             onClick={handleButtonClick}
           >
             <span className="relative z-10">View</span>
           </motion.a>
           {/* Tech icons */}
-          <div className="flex gap-3 ml-auto">
+          <div className="flex gap-2 sm:gap-3 flex-wrap sm:ml-auto">
             {project.tech?.map((tech) => (
               <div key={tech.name} className="relative flex flex-col items-center">
                 <img
                   src={tech.logo}
                   alt={tech.name}
-                  className="w-9 h-9 rounded-lg bg-black/10 p-1 grayscale hover:grayscale-0 hover:scale-110 hover:shadow-lg transition-all duration-200 peer"
+                  className="w-7 h-7 sm:w-9 sm:h-9 rounded-lg bg-black/10 p-1 grayscale hover:grayscale-0 hover:scale-110 hover:shadow-lg transition-all duration-200 peer"
                 />
-                <span className="absolute left-1/2 -translate-x-1/2 top-11 opacity-0 peer-hover:opacity-100 bg-[#222] text-xs text-white px-2 py-1 rounded shadow-lg transition-all duration-200 pointer-events-none whitespace-nowrap z-20 font-inter">
+                <span className="absolute left-1/2 -translate-x-1/2 top-9 sm:top-11 opacity-0 peer-hover:opacity-100 bg-[#222] text-xs text-white px-2 py-1 rounded shadow-lg transition-all duration-200 pointer-events-none whitespace-nowrap z-20 font-inter">
                   {tech.name}
                 </span>
               </div>
