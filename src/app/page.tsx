@@ -416,7 +416,7 @@ export default function Home() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.8, duration: 0.7, ease: "easeOut" }}
-            className="flex-1 flex justify-center lg:justify-end z-10 mt-8 lg:mt-0"
+            className="flex-1 flex justify-center lg:justify-center z-10 mt-8 lg:mt-0"
           >
             <div className="rounded-full bg-gradient-to-br from-violet to-purple p-1 shadow-2xl">
               <Image
@@ -424,7 +424,7 @@ export default function Home() {
                 alt="Profile photo"
                 width={150}
                 height={150}
-                className="rounded-full object-cover border-4 border-deep-blue w-[120px] h-[120px] sm:w-[150px] sm:h-[150px] lg:w-[180px] lg:h-[180px]"
+                className="rounded-full object-cover border-4 border-deep-blue w-[160px] h-[160px] sm:w-[170px] sm:h-[170px] lg:w-[200px] lg:h-[200px]"
                 priority
               />
             </div>
