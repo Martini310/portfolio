@@ -69,7 +69,7 @@ const ResumeCard: React.FC<ResumeCardProps> = ({ item, idx, isLast }) => {
           transition={{ duration: 0.3 }}
         />
         {/* Glassmorphism background with animated gradient */}
-        <div className="relative rounded-2xl bg-[#10162a]/80 backdrop-blur-md p-4 sm:p-6 lg:p-7 flex flex-col min-h-[100%] z-10 border border-white/5 before:absolute before:inset-0 before:rounded-2xl before:bg-[radial-gradient(circle_at_20%_20%,rgba(139,92,246,0.08)_0%,transparent_60%),radial-gradient(circle_at_80%_80%,rgba(59,130,246,0.08)_0%,transparent_60%)] before:animate-move-pattern before:z-0 before:pointer-events-none theme-transition">
+        <div className="relative rounded-2xl bg-[#10162a]/80 backdrop-blur-md p-4 sm:p-6 lg:p-7 flex flex-col min-h-[100%] z-10 border border-white/5 before:absolute before:inset-0 before:rounded-2xl before:bg-[radial-gradient(circle_at_20%_20%,rgba(139,92,246,0.08)_0%,transparent_60%),radial-gradient(circle_at_80%_80%,rgba(59,130,246,0.08)_0%,transparent_60%)] before:animate-move-pattern before:z-0 before:pointer-events-none">
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-2 gap-1 sm:gap-2">
             <span className="text-blue-400 font-semibold text-xs sm:text-sm lg:text-base font-inter">{item.date}</span>
             <span className="text-blue-300 font-medium text-xs sm:text-sm lg:text-base font-inter">{item.company}</span>
