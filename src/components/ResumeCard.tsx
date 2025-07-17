@@ -18,8 +18,8 @@ type ResumeCardProps = {
 const ResumeCard: React.FC<ResumeCardProps> = ({ item, idx, isLast }) => {
   const [expanded, setExpanded] = useState(false);
   const words = item.description.split(/\s+/);
-  const isLong = words.length > 50;
-  const shortDesc = isLong ? words.slice(0, 50).join(" ") + "..." : item.description;
+  const isLong = words.length > 40;
+  const shortDesc = isLong ? words.slice(0, 40).join(" ") + "..." : item.description;
   const cardRef = useRef<HTMLDivElement>(null);
   // Mouse tracking for glowing effect
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
