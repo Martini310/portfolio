@@ -21,7 +21,7 @@ const project = {
     "/archeo-2022/3.png",
     "/archeo-2022/4.png"
   ],
-  github: "https://github.com/Martini310/archeo-2022"
+  github: "https://github.com/Martini310/Archeo2022"
 };
 
 export default function Archeo2022ProjectPage() {

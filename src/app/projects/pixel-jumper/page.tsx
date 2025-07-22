@@ -24,7 +24,7 @@ const project = {
     "Edit jump power, speed, gravity in player.py"
   ],
   contact: "maritn.brzezinski@wp.eu",
-  github: "https://github.com/Martini310/pixel-jumper"
+  github: "https://github.com/Martini310/Pixel_jumper"
 };
 
 export default function PixelJumperProjectPage() {
@@ -83,6 +83,21 @@ export default function PixelJumperProjectPage() {
               </button>
             ))}
           </div>
+        </div>
+        <div className="mb-8">
+          <h2 className="text-xl font-bold mb-2 text-blue-300">Play the Game</h2>
+          <div className="w-full aspect-video rounded-xl overflow-hidden bg-black border border-blue-500/30">
+            <iframe
+              src="/pixel-jumper-game/index.html"
+              className="w-full h-full"
+              frameBorder="0"
+              allowFullScreen
+              title="Pixel Jumper Game"
+            ></iframe>
+          </div>
+          <p className="text-sm text-white/60 mt-2">
+            The game may take a moment to load. Controls: Arrow keys to move, space or up arrow to jump, R to restart. On safari please turn off power saving and if it still runs slowly - connect the power supply
+          </p>
         </div>
         {/* Lightbox Modal */}
         {lightbox !== null && (

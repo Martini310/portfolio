@@ -153,7 +153,8 @@ export default function TripCostCalcProjectPage() {
           </ul>
         </div>
         <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 mb-8">
-          <Link href={project.live} target="_blank" className="inline-block px-4 sm:px-6 py-3 rounded-full bg-gradient-to-r from-blue-500 to-violet-500 text-white font-semibold shadow-lg hover:scale-105 transition-transform text-center">
+          <Link href={project.live} target="_blank" className="inline-flex items-center justify-center gap-2 px-4 sm:px-6 py-2 rounded-full bg-gradient-to-r from-blue-500 to-violet-500 text-white font-semibold shadow-lg hover:scale-105 transition-transform text-center">
+            <Image src="/live.png" alt="Live Demo" width={30} height={30} />
             Live Demo
           </Link>
           <Link href={project.github} target="_blank" className="inline-block px-4 sm:px-6 py-3 rounded-full bg-gradient-to-r from-blue-500 to-violet-500 text-white font-semibold shadow-lg hover:scale-105 transition-transform flex items-center justify-center gap-2">
