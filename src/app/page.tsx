@@ -348,7 +348,7 @@ export default function Home() {
           </motion.div>
         )}
       </header>
-      <div className="pt-16 sm:pt-20" id="home">
+      <div className="pt-16 sm:pt-20 relative overflow-clip" id="home">
         {/* Glowing Orbs */}
         <div className="orb-bg" style={{top: '-120px', right: '-120px', width: '320px', height: '320px', background: 'radial-gradient(circle at 70% 30%, #7c3aed 0%, transparent 70%)'}} />
         <div className="orb-bg" style={{bottom: '-120px', left: '-120px', width: '320px', height: '320px', background: 'radial-gradient(circle at 30% 70%, #2563eb 0%, transparent 70%)'}} />
