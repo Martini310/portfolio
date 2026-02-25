@@ -28,6 +28,7 @@ const projects = [
     title: "BillWise",
     description: "A fullstack app for managing and tracking all your household bills in one place. BillWise synchronizes payments from multiple suppliers, provides a unified dashboard, and offers insightful statistics and charts—no more logging into each supplier separately.",
     link: "/projects/billwise",
+    image: "/billwise/1.png",
     tech: [
       { name: "Python", logo: "/python-logo.svg" },
       { name: "Django", logo: "/django-logo.svg" },
@@ -40,6 +41,7 @@ const projects = [
     title: "Archeo 2022",
     description: "A Tkinter desktop app that replaces paper registers for managing and tracking company archive documents. Features search, operator selection, and clipboard integration.",
     link: "/projects/archeo-2022",
+    image: "/archeo-2022/3.png",
     tech: [
       { name: "Python", logo: "/python-logo.svg" },
       { name: "SQLite", logo: "/sqlite-logo.svg" },
@@ -51,6 +53,7 @@ const projects = [
     title: "Pixel Jumper",
     description: "A simple platformer game in PyGame. Jump on moving platforms, avoid the scrolling background, and aim for the top of the highscores list!",
     link: "/projects/pixel-jumper",
+    image: "/pixel-jumper/2.png",
     tech: [
       { name: "Python", logo: "/python-logo.svg" },
       { name: "PyGame", logo: "/python-logo.svg" }
@@ -60,6 +63,7 @@ const projects = [
     title: "Portfolio Website",
     description: "A modern, interactive portfolio built with Next.js, Tailwind CSS, and Framer Motion.",
     link: "#",
+    image: "/nextjs-logo.svg",
     tech: [
       { name: "Next.js", logo: "/nextjs-logo.svg" },
       { name: "React", logo: "/react-logo.svg" },
@@ -72,11 +76,12 @@ const projects = [
     title: "Trip Cost Calc",
     description: "A Python Kivy app to calculate car trip costs based on real-time fuel prices, weather, and route info.",
     link: "/projects/trip-cost-calc",
+    image: "/trip-cost-calc/1.png",
     tech: [
       { name: "Python", logo: "/python-logo.svg" },
       { name: "Kivy", logo: "/python-logo.svg" },
+      { name: "OpenWeatherMap API", logo: "/globe.svg" },
       { name: "Google Maps API", logo: "/globe.svg" },
-      { name: "OpenWeatherMap API", logo: "/globe.svg" }
     ]
   },
 ];

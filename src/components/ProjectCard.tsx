@@ -7,6 +7,7 @@ type Project = {
   title: string;
   description: string;
   link: string;
+  image?: string;
   tech?: {
     name: string;
     logo: string;
@@ -73,6 +74,15 @@ export default function ProjectCard({ project }: ProjectCardProps) {
       />
       {/* Glassmorphism background with animated gradient */}
       <div className="relative rounded-2xl bg-[#10162a]/80 backdrop-blur-md p-4 sm:p-6 lg:p-7 flex flex-col min-h-[100%] z-10 border border-white/4 before:absolute before:inset-0 before:rounded-2xl before:bg-[radial-gradient(circle_at_20%_20%,rgba(139,92,246,0.08)_0%,transparent_60%),radial-gradient(circle_at_80%_80%,rgba(59,130,246,0.08)_0%,transparent_60%)] before:animate-move-pattern before:z-0 before:pointer-events-none">
+        
+        {project.image && (
+          <img
+            src={project.image}
+            alt=""
+            className="absolute top-0 right-0 h-2/3 w-2/3 object-contain object-right-top opacity-10 rotate-12 pointer-events-none"
+          />
+        )}
+        
         {/* Project Title */}
         <h3 className="text-xl sm:text-2xl font-extrabold font-inter bg-gradient-to-r from-blue-300 via-violet-700 to-purple-400 bg-clip-text text-transparent drop-shadow-md mb-2 relative z-10">
           {project.title}
